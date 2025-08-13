@@ -1,11 +1,20 @@
-use axum::{Router, routing::get};
+use axum::{Json, Router, extract::Path, routing::get};
+use serde_json::{Value, json};
 
 #[tokio::main]
 async fn main() {
-    // build our application with a single route
-    let app = Router::new().route("/", get(|| async { "Hello, World!" }));
+    let app = Router::new()
+        .route("/post", get(get_posts))
+        .route("/post/{id}", get(get_post));
 
-    // run our app with hyper, listening globally on port 3000
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
+}
+
+async fn get_posts() -> Json<Value> {
+    Json(json!({}))
+}
+
+async fn get_post(Path(path): Path<String>) -> Json<Value> {
+    Json(json!({ "id": path }))
 }
