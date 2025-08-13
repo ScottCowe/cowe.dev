@@ -12,9 +12,36 @@ async fn main() {
 }
 
 async fn get_posts() -> Json<Value> {
-    Json(json!({}))
+    Json(json!({
+        "posts": [
+            {
+                "id": "post-1",
+                "title": "Post 1"
+            },
+            {
+                "id": "post-2",
+                "title": "Post 2"
+            },
+            {
+                "id": "post-3",
+                "title": "Post 3"
+            },
+            {
+                "id": "post-4",
+                "title": "Post 4"
+            }
+        ]
+    }))
 }
 
 async fn get_post(Path(path): Path<String>) -> Json<Value> {
-    Json(json!({ "id": path }))
+    let title = format!("Title: {}", path);
+    let content = format!("Content: {}", path);
+
+    Json(json!({
+        "id": path,
+        "title": title,
+        "format": "plaintext",
+        "content": content
+    }))
 }
