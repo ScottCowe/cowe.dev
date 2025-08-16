@@ -4,7 +4,7 @@ use yew_router::prelude::*;
 pub mod blog;
 pub mod home;
 
-use blog::{Blog, BlogPost};
+use blog::{BlogpostListPage, BlogpostPage};
 use home::Home;
 
 #[derive(Routable, Clone, PartialEq)]
@@ -23,8 +23,8 @@ pub enum Route {
 pub fn switch(route: Route) -> Html {
     match route {
         Route::Home => html! { <Home /> },
-        Route::Blog => html! { <Blog /> },
-        Route::BlogPost { id } => html! { <BlogPost id={id} /> },
+        Route::Blog => html! { <BlogpostListPage /> },
+        Route::BlogPost { id } => html! { <BlogpostPage id={id} /> },
         Route::NotFound => html! { <h1>{ "404" }</h1> },
     }
 }

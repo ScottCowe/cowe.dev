@@ -4,34 +4,42 @@ use serde_json::{Value, json};
 #[tokio::main]
 async fn main() {
     let app = Router::new()
-        .route("/post", get(get_posts))
-        .route("/post/{id}", get(get_post));
+        .route("/api/post", get(get_posts))
+        .route("/api/post/{id}", get(get_post));
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
 
 async fn get_posts() -> Json<Value> {
-    Json(json!({
-        "posts": [
+    Json(json!(
+        [
             {
                 "id": "post-1",
-                "title": "Post 1"
+                "title": "Post 1",
+                "format": "plaintext",
+                "content": "Post 1"
             },
             {
                 "id": "post-2",
-                "title": "Post 2"
+                "title": "Post 2",
+                "format": "plaintext",
+                "content": "Post 2"
             },
             {
                 "id": "post-3",
-                "title": "Post 3"
+                "title": "Post 3",
+                "format": "plaintext",
+                "content": "Post 3"
             },
             {
                 "id": "post-4",
-                "title": "Post 4"
+                "title": "Post 4",
+                "format": "plaintext",
+                "content": "Post 4"
             }
         ]
-    }))
+    ))
 }
 
 async fn get_post(Path(path): Path<String>) -> Json<Value> {

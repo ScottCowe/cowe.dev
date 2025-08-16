@@ -1,19 +1,44 @@
+use gloo_net::http::Request;
 use yew::prelude::*;
 
+use crate::components::blogpost_list::BlogpostListComponent;
+use crate::types::blogposts::Blogpost;
+
+#[function_component]
+pub fn BlogpostListPage() -> Html {
+    let posts = use_state(|| vec![]);
+
+    {
+        let posts = posts.clone();
+
+        use_effect_with((), move |_| {
+            let posts = posts.clone();
+
+            wasm_bindgen_futures::spawn_local(async move {
+                let fetched_posts: Vec<Blogpost> = Request::get("/api/post")
+                    .send()
+                    .await
+                    .unwrap()
+                    .json()
+                    .await
+                    .unwrap();
+
+                posts.set(fetched_posts);
+            });
+            || ()
+        });
+    }
+
+    html! { <BlogpostListComponent posts={(*posts).clone()} /> }
+}
+
 #[derive(Properties, PartialEq)]
-pub struct Props {
+pub struct BlogpostPageProps {
     pub id: String,
 }
 
 #[function_component]
-pub fn Blog() -> Html {
-    html! {
-        <h1>{ "Blog" }</h1>
-    }
-}
-
-#[function_component]
-pub fn BlogPost(props: &Props) -> Html {
+pub fn BlogpostPage(props: &BlogpostPageProps) -> Html {
     html! {
         <h1>{ format!("Blog: {}", props.id.clone()) }</h1>
     }
