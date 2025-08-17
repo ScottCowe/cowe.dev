@@ -1,10 +1,10 @@
 use yew::prelude::*;
 
-use crate::types::blogposts::*;
+use common::types::blogposts::BlogpostData;
 
 #[derive(Properties, PartialEq)]
 pub struct BlogpostListProps {
-    pub posts: Vec<Blogpost>,
+    pub posts: Vec<BlogpostData>,
 }
 
 #[function_component]

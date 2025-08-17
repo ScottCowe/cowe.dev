@@ -82,6 +82,7 @@ name = "backend"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "common",
  "serde_json",
  "tokio",
 ]
@@ -135,6 +136,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268"
 
 [[package]]
+name = "common"
+version = "0.1.0"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "console_error_panic_hook"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -148,6 +156,7 @@ dependencies = [
 name = "cowedev"
 version = "0.1.0"
 dependencies = [
+ "common",
  "gloo-net 0.6.0",
  "serde",
  "wasm-bindgen-futures",

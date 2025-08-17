@@ -2,7 +2,7 @@ use gloo_net::http::Request;
 use yew::prelude::*;
 
 use crate::components::blogpost_list::BlogpostListComponent;
-use crate::types::blogposts::Blogpost;
+use common::types::blogposts::BlogpostData;
 
 #[function_component]
 pub fn BlogpostListPage() -> Html {
@@ -15,7 +15,7 @@ pub fn BlogpostListPage() -> Html {
             let posts = posts.clone();
 
             wasm_bindgen_futures::spawn_local(async move {
-                let fetched_posts: Vec<Blogpost> = Request::get("/api/post")
+                let fetched_posts: Vec<BlogpostData> = Request::get("/api/post")
                     .send()
                     .await
                     .unwrap()

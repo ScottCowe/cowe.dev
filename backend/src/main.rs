@@ -18,25 +18,21 @@ async fn get_posts() -> Json<Value> {
                 "id": "post-1",
                 "title": "Post 1",
                 "format": "plaintext",
-                "content": "Post 1"
             },
             {
                 "id": "post-2",
                 "title": "Post 2",
                 "format": "plaintext",
-                "content": "Post 2"
             },
             {
                 "id": "post-3",
                 "title": "Post 3",
                 "format": "plaintext",
-                "content": "Post 3"
             },
             {
                 "id": "post-4",
                 "title": "Post 4",
                 "format": "plaintext",
-                "content": "Post 4"
             }
         ]
     ))
