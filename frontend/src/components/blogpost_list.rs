@@ -1,6 +1,8 @@
 use yew::prelude::*;
+use yew_router::prelude::Link;
 
-use common::types::blogposts::BlogpostData;
+use crate::app::Route;
+use crate::types::blogposts::BlogpostData;
 
 #[derive(Properties, PartialEq)]
 pub struct BlogpostListProps {
@@ -14,7 +16,7 @@ pub fn BlogpostListComponent(props: &BlogpostListProps) -> Html {
         .iter()
         .map(|post| {
             html! {
-                <h1>{ format!("{} {}", post.id, post.title)}</h1>
+                <Link<Route> to={Route::Blogpost { id: post.id.clone() }}>{ &post.title }</Link<Route>>
             }
         })
         .collect::<Html>();

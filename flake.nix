@@ -59,6 +59,7 @@
           # TODO: Use $TMP instead of /build
           XDG_CACHE_HOME = "/build/cache";
         };
+
         devShell = pkgs.mkShell {
           name = "rust-env";
           src = ./.;
@@ -72,6 +73,8 @@
               nodePackages.sass
               trunk
               zlib
+              postgresql
+              sqlx-cli
             ]
           );
 
