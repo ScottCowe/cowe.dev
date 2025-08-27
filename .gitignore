@@ -1,8 +1,2 @@
 /target
-/frontend/dist
-/frontend/target
-/backend/.sqlx
-/backend/target
-.sqlx
-.tmp 
-logfile
+/dist
