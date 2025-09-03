@@ -9,3 +9,4 @@ yew-router = { git = "https://github.com/yewstack/yew.git" }
 gloo-net = "0.6.0"
 wasm-bindgen-futures = "0.4"
 serde = { version = "1.0.219", features = ["derive"] }
+stylist = { version = "0.13", features = ["yew_integration", "parser"] }

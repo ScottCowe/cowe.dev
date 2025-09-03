@@ -1,10 +1,11 @@
+use stylist::yew::styled_component;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
 pub mod blog;
 pub mod home;
 
-use blog::{BlogpostListPage, BlogpostPage};
+use blog::{blogpost_page::BlogpostPage, blogposts_page::BlogpostListPage};
 use home::Home;
 
 #[derive(Routable, Clone, PartialEq)]
