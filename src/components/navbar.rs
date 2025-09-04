@@ -1,4 +1,4 @@
-use stylist::{Style, css, style, yew::styled_component};
+use stylist::{Style, css};
 use yew::{Html, Properties, classes, html, prelude::function_component};
 use yew_router::prelude::Link;
 
@@ -16,6 +16,7 @@ pub fn NavbarComponent(props: &NavbarProps) -> Html {
         margin: auto;
         width: 50%;
         text-align: center;
+        padding: 20px 0px 20px 0px;
 
         a {
             margin: auto;
