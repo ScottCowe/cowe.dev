@@ -24,12 +24,22 @@ pub fn BlogpostListComponent(props: &BlogpostListProps) -> Html {
             };
             let onclick = Callback::from(move |_| navigator.push(&page));
 
+            let post_date = post.created_on.format("%d/%m/%Y").to_string();
+
+            let tags: String = match post.tags.clone() {
+                None => "".to_string(),
+                Some(tags) => tags
+                    .iter()
+                    .map(|tag| format!("#{} ", tag))
+                    .fold(String::new(), |acc, tag| acc + &tag),
+            };
+
             html! {
                 <div class={classes!("post")} {onclick}>
                     <h1 class={classes!("post-title")}>{ &post.title }</h1>
                     <div class={classes!("post-info")}>
-                        <p class={classes!("post-tags")}>{ "#tags" }</p>
-                        <p class={classes!("post-date")}>{ "Posted on: " }</p>
+                        <p class={classes!("post-tags")}>{ tags }</p>
+                        <p class={classes!("post-date")}>{ post_date }</p>
                     </div>
                 </div>
             }
@@ -41,6 +51,7 @@ pub fn BlogpostListComponent(props: &BlogpostListProps) -> Html {
         margin: auto;
         width: 40%;
         padding: 40px 0px 0px 0px;
+        font-family: "Lucida Console", "Courier New", monospace;
 
         a {
             text-decoration: none;

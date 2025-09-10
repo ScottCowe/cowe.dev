@@ -1,17 +1,12 @@
-use stylist::yew::styled_component;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
 pub mod blog;
-pub mod home;
 
 use blog::{blogpost_page::BlogpostPage, blogposts_page::BlogpostListPage};
-use home::Home;
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
-    #[at("/")]
-    Home,
     #[at("/blog")]
     Blog,
     #[at("/blog/:id")]
@@ -23,7 +18,6 @@ pub enum Route {
 
 pub fn switch(route: Route) -> Html {
     match route {
-        Route::Home => html! { <Home /> },
         Route::Blog => html! { <BlogpostListPage /> },
         Route::Blogpost { id } => html! { <BlogpostPage id={id} /> },
         Route::NotFound => html! { <h1>{ "404" }</h1> },

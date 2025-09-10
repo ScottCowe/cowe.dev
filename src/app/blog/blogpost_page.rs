@@ -1,3 +1,4 @@
+use chrono::{DateTime, NaiveDateTime};
 use gloo_net::http::Request;
 use yew::prelude::*;
 
@@ -17,6 +18,9 @@ pub fn BlogpostPage(props: &BlogpostPageProps) -> Html {
         id: "unloaded".to_string(),
         title: "unloaded".to_string(),
         format: "unloaded".to_string(),
+        created_on: NaiveDateTime::from_timestamp(0, 0), // ik its deprecated, idgaf, i'll fix later
+        updated_on: None,
+        tags: None,
         content: "unloaded".to_string(),
     });
     let url = format!("/api/posts/{}", props.id);
@@ -46,7 +50,7 @@ pub fn BlogpostPage(props: &BlogpostPageProps) -> Html {
 
     html! {
         <div>
-            <NavbarComponent current_page={Route::Blogpost { id: (*post).clone().id }}/>
+            <NavbarComponent current_page={Route::Blogpost { id: (*post).clone().id }} />
             <BlogpostComponent post={(*post).clone()} />
         </div>
     }

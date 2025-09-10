@@ -17,6 +17,7 @@ pub fn NavbarComponent(props: &NavbarProps) -> Html {
         width: 50%;
         text-align: center;
         padding: 20px 0px 20px 0px;
+        font-family: "Lucida Console", "Courier New", monospace;
 
         a {
             margin: auto;
@@ -32,7 +33,6 @@ pub fn NavbarComponent(props: &NavbarProps) -> Html {
 
     html! {
         <div class={classes!(style_name)}>
-            <Link<Route> to={Route::Home}>{ "Home" }</Link<Route>>
             <Link<Route> to={Route::Blog}>{ "Blog" }</Link<Route>>
         </div>
     }

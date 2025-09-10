@@ -1,4 +1,5 @@
 use crate::types::blogposts::Blogpost;
+use stylist::{Style, css};
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -14,14 +15,61 @@ pub fn BlogpostComponent(props: &BlogpostProps) -> Html {
         },
         "html" => Html::from_html_unchecked(props.post.content.clone().into()),
         // TODO: Implement markdown
-        _ => html! {
-            <h1>{ "Internal fuckup " }</h1>
-        },
+        _ => html! { "Internal fuckup" },
+    };
+
+    let style_str = css!(
+        r#"
+            width: 50%;
+            margin: auto;
+            font-family: "Lucida Console", "Courier New", monospace;
+
+            .post-title {
+                margin: 10px 0px 0px 0px;
+            }
+
+            .post-info {
+                display: flex;
+            }
+
+            .post-info p {
+                flex: 1;
+            }
+
+            .post-tags p {
+                flex: 1;
+            }
+
+            .post-tags {
+                text-align: right;
+            }
+        "#
+    );
+
+    let style = Style::new(style_str).expect("Failed to create style");
+    let style_name = format!("{}", style.get_class_name());
+
+    let post_date = props
+        .post
+        .created_on
+        .format("Written on %d/%m/%Y at %H:%M")
+        .to_string();
+
+    let tags: String = match props.post.tags.clone() {
+        None => "".to_string(),
+        Some(tags) => tags
+            .iter()
+            .map(|tag| format!("#{} ", tag))
+            .fold(String::new(), |acc, tag| acc + &tag),
     };
 
     html! {
-        <div>
-            <h1>{ props.post.title.clone() }</h1>
+        <div class={classes!(style_name)}>
+            <h1 class={classes!("post-title")}>{ props.post.title.clone() }</h1>
+            <div class={classes!("post-info")}>
+                <p class={classes!("post-date")}>{ post_date }</p>
+                <p class={classes!("post-tags")}>{ tags }</p>
+            </div>
             { content }
         </div>
     }
