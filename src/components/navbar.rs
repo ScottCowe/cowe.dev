@@ -1,8 +1,8 @@
 use stylist::{Style, css};
-use yew::{Html, Properties, classes, html, prelude::function_component};
+use yew::{Html, Properties, classes, html, prelude::function_component, use_context};
 use yew_router::prelude::Link;
 
-use crate::app::Route;
+use crate::app::{Route, Theme};
 
 #[derive(Properties, PartialEq)]
 pub struct NavbarProps {
@@ -11,21 +11,25 @@ pub struct NavbarProps {
 
 #[function_component]
 pub fn NavbarComponent(props: &NavbarProps) -> Html {
+    let theme = use_context::<Theme>().expect("Could not find context");
+
     let style_str = css!(
         r#"
         margin: auto;
-        width: 50%;
+        width: 100%;
         text-align: center;
         padding: 20px 0px 20px 0px;
-        font-family: "Lucida Console", "Courier New", monospace;
+        background-color: ${bg}; 
 
         a {
             margin: auto;
             text-decoration: none;
-            color: black;
             padding: 20px;
+            color: ${text};
         }
-        "#
+        "#,
+        bg = theme.primary,
+        text = theme.tertiary,
     );
 
     let style = Style::new(style_str).expect("Could not create style");

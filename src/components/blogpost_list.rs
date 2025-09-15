@@ -2,7 +2,7 @@ use stylist::{Style, css};
 use yew::prelude::*;
 use yew_router::hooks::use_navigator;
 
-use crate::app::Route;
+use crate::app::{Route, Theme};
 use crate::types::blogposts::BlogpostData;
 
 #[derive(Properties, PartialEq)]
@@ -12,6 +12,7 @@ pub struct BlogpostListProps {
 
 #[function_component]
 pub fn BlogpostListComponent(props: &BlogpostListProps) -> Html {
+    let theme = use_context::<Theme>().expect("No context found");
     let navigator = use_navigator().unwrap();
 
     let posts = props
@@ -51,16 +52,20 @@ pub fn BlogpostListComponent(props: &BlogpostListProps) -> Html {
         margin: auto;
         width: 40%;
         padding: 40px 0px 0px 0px;
-        font-family: "Lucida Console", "Courier New", monospace;
+        color: ${text}; 
 
         a {
             text-decoration: none;
-            color: black;
+            color: ${text}; 
         }
 
         .post {
-            border: 3px solid red;
             margin: 8px;
+            background-color: ${bg};
+            padding: 8px;
+        }
+
+        .post h1 {
         }
         
         .post-title {
@@ -79,7 +84,9 @@ pub fn BlogpostListComponent(props: &BlogpostListProps) -> Html {
         .post-date {
             text-align: right;
         }
-        "#
+        "#,
+        bg = theme.primary,
+        text = theme.tertiary,
     );
 
     let style = Style::new(style_str).expect("Failed to create style");

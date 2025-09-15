@@ -22,7 +22,6 @@ pub fn BlogpostComponent(props: &BlogpostProps) -> Html {
         r#"
             width: 50%;
             margin: auto;
-            font-family: "Lucida Console", "Courier New", monospace;
 
             .post-title {
                 margin: 10px 0px 0px 0px;

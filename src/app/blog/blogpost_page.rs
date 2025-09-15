@@ -1,5 +1,6 @@
 use chrono::{DateTime, NaiveDateTime};
 use gloo_net::http::Request;
+use stylist::{Style, css};
 use yew::prelude::*;
 
 use crate::app::Route;
@@ -49,9 +50,9 @@ pub fn BlogpostPage(props: &BlogpostPageProps) -> Html {
     }
 
     html! {
-        <div>
+        <>
             <NavbarComponent current_page={Route::Blogpost { id: (*post).clone().id }} />
             <BlogpostComponent post={(*post).clone()} />
-        </div>
+        </>
     }
 }

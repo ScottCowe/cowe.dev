@@ -1,4 +1,5 @@
 use gloo_net::http::Request;
+use stylist::{Style, css};
 use yew::prelude::*;
 
 use crate::app::Route;
@@ -32,9 +33,9 @@ pub fn BlogpostListPage() -> Html {
     }
 
     html! {
-        <div>
+        <>
             <NavbarComponent current_page={Route::Blog}/>
             <BlogpostListComponent posts={(*posts).clone()} />
-        </div>
+        </>
     }
 }
