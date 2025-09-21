@@ -1,0 +1,5 @@
+/target
+/frontend/dist
+/result
+.tmp
+.env
