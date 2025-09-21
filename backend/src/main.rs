@@ -23,11 +23,13 @@ async fn main() {
 
     let socket_path = env::var("SOCKET_PATH").expect("SOCKET_PATH envar not set");
     let database_name = env::var("DB_NAME").expect("DB_NAME envar not found");
+    let db_username = env::var("DB_USER").expect("DB_USER envar not set");
 
     // TODO: Proper error handling
     let opts = PgConnectOptions::new()
         .socket(socket_path)
-        .database(&database_name);
+        .database(&database_name)
+        .username(&db_username);
 
     let pool = PgPoolOptions::new()
         .max_connections(5) // <- Seems low (in theory anyway)
