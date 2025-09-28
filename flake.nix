@@ -1,12 +1,17 @@
 {
   description = "cowe.dev";
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "path:/home/cowe/repos/nixpkgs";
-    nixpkgs.url = "github:ScottCowe/nixpkgs/add-wasm-bindgen-cli-0-2-103"; # cuz 2.101 aint even in nixpkgs yet
+    # nixpkgs.url = "github:ScottCowe/nixpkgs/add-wasm-bindgen-cli-0-2-103"; # cuz 2.101 aint even in nixpkgs yet
 
     fenix = {
       url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    wasm-bindgen-cli-flake = {
+      url = "github:fusion44/wasm-bindgen-cli-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -54,7 +59,7 @@
 
               nativeBuildInputs = with pkgsFor.${system}; [
                 trunk
-                wasm-bindgen-cli
+                inputs.wasm-bindgen-cli-flake.packages.${system}.wasm-bindgen-cli
                 nodePackages.sass
                 binaryen
               ];
