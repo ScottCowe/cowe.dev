@@ -15,8 +15,6 @@ pub enum Route {
     Blog,
     #[at("/blog/:id")]
     Blogpost { id: String },
-    #[at("/github")]
-    Github,
     #[not_found]
     #[at("/404")]
     NotFound,
@@ -27,7 +25,6 @@ pub fn switch(route: Route) -> Html {
         Route::Blog => html! { <BlogpostListPage /> },
         Route::Blogpost { id } => html! { <BlogpostPage id={id} /> },
         Route::NotFound => html! { <h1>{ "404" }</h1> },
-        Route::Github => html! { <h1>{ "technical fuckup happened" }</h1> },
     }
 }
 

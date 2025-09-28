@@ -38,7 +38,7 @@ pub fn NavbarComponent(_props: &NavbarProps) -> Html {
     html! {
         <div class={classes!(style_name)}>
             <Link<Route> to={Route::Blog}>{ "Blog" }</Link<Route>>
-            <Link<Route> to={Route::Github}>{ "Github" }</Link<Route>>
+            <a href={ "https://github.com/ScottCowe" }>{ "Github" }</a>
         </div>
     }
 }
