@@ -14,8 +14,6 @@ use notfound_page::NotFound;
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
-    #[at("/")]
-    Index,
     #[at("/blog")]
     Blog,
     #[at("/blog/:id")]
