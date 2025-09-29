@@ -27,7 +27,7 @@ pub enum Route {
 
 pub fn switch(route: Route) -> Html {
     match route {
-        Route::Blog | Route::Index => html! { <BlogpostListPage /> },
+        Route::Blog  => html! { <BlogpostListPage /> },
         Route::Blogpost { id } => html! { <BlogpostPage id={id} /> },
         Route::NotFound => html! { <NotFound /> },
     }
