@@ -14,6 +14,8 @@ use notfound_page::NotFound;
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
+    #[at("/")]
+    Index,
     #[at("/blog")]
     Blog,
     #[at("/blog/:id")]
@@ -25,7 +27,7 @@ pub enum Route {
 
 pub fn switch(route: Route) -> Html {
     match route {
-        Route::Blog  => html! { <BlogpostListPage /> },
+        Route::Blog | Route::Index => html! { <BlogpostListPage /> },
         Route::Blogpost { id } => html! { <BlogpostPage id={id} /> },
         Route::NotFound => html! { <NotFound /> },
     }
